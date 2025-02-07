@@ -3,9 +3,6 @@ plugins {
     id 'maven-publish'
 }
 
-group = 'org.example'
-version = '1.0-SNAPSHOT'
-
 repositories {
     mavenCentral()
 }
@@ -23,7 +20,7 @@ publishing {
   repositories {
     maven {
       name = "GitHubPackages"
-      url = "https://maven.pkg.github.com/meta8686/Github-Actions-Gradle"
+      url = uri("https://maven.pkg.github.com/meta8686/Github-Actions-Gradle")
       credentials {
         username = System.getenv("GITHUB_ACTOR")
         password = System.getenv("GITHUB_TOKEN")
