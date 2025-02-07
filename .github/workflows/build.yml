@@ -50,6 +50,8 @@ jobs:
       contents: read
       packages: write
     steps:
+      - name: Grant permission to gradle
+        run: chmod +x gradlew
       - name: Publish package
         run: ./gradlew publish
         env:
