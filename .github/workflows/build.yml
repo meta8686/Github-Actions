@@ -11,6 +11,7 @@ jobs:
     runs-on: ${{matrix.os}}
     permissions:
       contents: read
+      packages: write
     strategy:
       matrix:
         os: [ubuntu-latest]
@@ -28,6 +29,11 @@ jobs:
       - name: Build with Gradle Wrapper
         run: ./gradlew build
 
+      - name: Publish package
+        run: ./gradlew publish
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
   dependency-submission:
     runs-on: ubuntu-latest
     permissions:
@@ -42,17 +48,3 @@ jobs:
 
       - name: Generate and submit dependency graph
         uses: gradle/actions/dependency-submission@af1da67850ed9a4cedd57bfd976089dd991e2582
-
-  publish:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    steps:
-      - name: Grant permission to gradle
-        run: chmod +x gradlew
-      - name: Publish package
-        run: ./gradlew publish
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
