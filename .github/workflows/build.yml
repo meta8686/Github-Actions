@@ -33,7 +33,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          echo "GitHub UserName : ${GITHUB_ACTIOR}"
+          echo "GitHub UserName : ${GITHUB_ACTOR}"
           ./gradlew publish
 
   dependency-submission:
